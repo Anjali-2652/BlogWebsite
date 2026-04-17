@@ -5,29 +5,30 @@ import Blogs from "./Pages/Blogs"
 import About from "./Pages/About"
 import Login from "./Pages/Login"
 import SignUp from "./Pages/SignUp"
+import Navbar from './Components/Navbar'
 
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Home/>
+    element:<><Navbar/><Home/></>
   },
   {
     path :"/blogs",
-    element:<Blogs/>
+    element:<><Navbar/><Blogs/></>
   },
    {
     path :"/about",
-    element:<About/>
+    element:<><Navbar/><About/></>
   },
    {
     path :"/login",
-    element:<Login/>
+    element:<><Navbar/><Login/></>
   },
    {
     path :"/signup",
-    element:<SignUp/>
+    element:<><Navbar/><SignUp/></>
   }
 ])
 
