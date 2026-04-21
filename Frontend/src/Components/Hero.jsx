@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import heroImg from "../assets/hero.jpg";
 
 const Hero = () => {
   return (
@@ -22,9 +23,20 @@ const Hero = () => {
               <Button className="text-lg"> Get Started</Button>
             </Link>
             <Link>
-              <Button variant = "outline" className= "border-white px-6 py-3 text-lg"> Learn More</Button>
+              <Button
+                variant="outline"
+                className="border-white px-6 py-3 text-lg"
+              >
+                {" "}
+                Learn More
+              </Button>
             </Link>
           </div>
+        </div>
+
+        {/* image section.....  */}
+        <div className="flex items-center justify-center">
+          <img src={heroImg} alt="" className="md:h-125 md:w-150" />
         </div>
       </div>
     </div>
