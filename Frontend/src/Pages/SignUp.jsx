@@ -6,24 +6,65 @@ import {
   CardTitle,
   CardContent,
 } from "../Components/ui/card";
-import {Link } from "react-router-dom";
+import axios from "axios";
+import { Link,useNavigate } from "react-router-dom";
 import { Label } from "../Components/ui/label";
 import { Input } from "../Components/ui/input";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "../Components/ui/button";
+import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../redux/authSlice";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+    const {loading} = useSelector(store=>store.auth)
+    const dispatch = useDispatch();
+
+
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-  })
-  const handleChange = (e) =>{
-    const {name, value} = e.target 
+  });
 
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user);
+    try {
+      dispatch(setLoading(true))
+      const res = await axios.post(
+        `http://localhost:8000/api/v1/user/register`,
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if(res.data.success){ 
+        navigate("/login")
+        toast.success(res.data.message)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }finally{
+      dispatch(setLoading(false))
+    }
+  };
+
   return (
     <div className="flex h-screen md:pt-14 md:h-157.5 ">
       <div className="hidden md:block">
@@ -42,20 +83,26 @@ export const SignUp = () => {
             </p>
           </CardHeader>
           <CardContent>
-            <form action="" className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="flex gap-3">
                 <div>
                   <Label>First Name</Label>
                   <Input
                     type="text"
+                    name="firstName"
                     placeholder="First Name"
                     className=" dark:border-gray-600 dark:bg-gray-900"
+                    value={user.firstName}
+                    onChange={handleChange}
                   />
                 </div>
                 <div>
                   <Label>Last Name</Label>
                   <Input
                     type="text"
+                    name="lastName"
+                    value={user.lastName}
+                    onChange={handleChange}
                     placeholder="Last Name"
                     className=" dark:border-gray-600 dark:bg-gray-900"
                   />
@@ -65,6 +112,9 @@ export const SignUp = () => {
                 <Label>Email</Label>
                 <Input
                   type="email"
+                  name="email"
+                  value={user.email}
+                  onChange={handleChange}
                   placeholder="john.doe@gmail.com"
                   className=" dark:border-gray-600 dark:bg-gray-900"
                 />
@@ -72,20 +122,41 @@ export const SignUp = () => {
               <div className="relative">
                 <Label>Password</Label>
                 <Input
-                  type={showPassword ? "text":"password"}
+                  type={showPassword ? "text" : "password"}
+                  name="password"
                   placeholder="create a password"
                   className=" dark:border-gray-600 dark:bg-gray-900"
+                  value={user.password}
+                  onChange={handleChange}
                 />
-                <button onClick={()=> setShowPassword(!showPassword)}
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
                   type="button"
                   className="absolute right-3 top-6 text-gray-500"
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              <Button type = "submit" className = "w-full"> Sign Up    </Button>
-                <p className="text-center txt-gray-600 dark:text-gray-300"> Already have an account? <Link to="/login" ><span className="underline cursor-pointer hover: text-gray-800 dark:hover:text-gray-100"> Sign in</span></Link></p>
-           
+              <Button type="submit" className="w-full">
+               {
+                  loading ? (
+                    <>
+                    <Loader2 className="mrr-2 w-4 h-4 animate-spin"/>
+                    please wait
+                    </>
+                  ) : ("SignUp")
+                }
+              </Button>
+              <p className="text-center txt-gray-600 dark:text-gray-300">
+                {" "}
+                Already have an account?{" "}
+                <Link to="/login">
+                  <span className="underline cursor-pointer hover: text-gray-800 dark:hover:text-gray-100">
+                    {" "}
+                    Sign in
+                  </span>
+                </Link>
+              </p>
             </form>
           </CardContent>
         </Card>

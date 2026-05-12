@@ -1,13 +1,61 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+import { ChartColumnBig, Copy, Edit, Keyboard, LogOut, Search } from "lucide-react";
 import { Button } from "./ui/button";
-import { FaMoon } from "react-icons/fa6";
+import { FaComment, FaCommentDollar, FaCommentDots, FaComments, FaCommentSlash, FaMoon, FaRegComment, FaSun } from "react-icons/fa6";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../redux/themeSlice";
+import { toast } from "sonner";
+import {
+  CreditCardIcon,
+  LogOutIcon,
+  SettingsIcon,
+  UserIcon,
+} from "lucide-react"
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { setUser } from "../redux/authSlice";
+import axios from "axios";
 
 const Navbar = () => {
-  const user = false;
+  const { user } = useSelector((store) => store.auth);
+  const { theme } = useSelector((store) => store.theme);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = async (e) => {
+    try {
+      const res = await axios.get(`http://localhost:8000/api/v1/user/logout`, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        navigate("/");
+        dispatch(setUser(null));
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
+  };
+
   return (
     <div className="py-2 fixed w-full dark:bg-gray-800 dark:border-b-gray-600 border-b-gray-300 border-2 bg-white z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-0">
@@ -48,17 +96,70 @@ const Navbar = () => {
             </Link>
           </ul>
           <div className="flex">
-            <Button>
-              <FaMoon />
+            <Button onClick={() => dispatch(toggleTheme())}>
+              {theme === "light" ? <FaMoon /> : <FaSun />}
             </Button>
             {user ? (
-              <div></div>
+              <div className="ml-7 md:flex gap-3 items-center">
+              
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    {/* <Button variant="outline">Open</Button> */}
+
+                    <Avatar>
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40" align="start">
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuItem>
+                        <UserIcon/>
+                        <span>Profile</span>
+                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <ChartColumnBig/>
+                        <span>Blogs</span>
+                        
+                        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <FaRegComment/>
+                        Comments
+                        <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem>
+                          <Edit/>
+                        Write Blog
+                        <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                  
+                    </DropdownMenuGroup>
+                    
+                    
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem>
+                        <LogOut/>
+                        Log out
+                        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                <Button onClick={logoutHandler}>Logout</Button>
+              </div>
             ) : (
               <div className="ml-7 md:flex gap-2">
-                <Link to = {"/login"}>
+                <Link to={"/login"}>
                   <Button>Login</Button>
                 </Link>
-                <Link to = {"/signup"} className="hidden md:block">
+                <Link to={"/signup"} className="hidden md:block">
                   <Button>SignUp</Button>
                 </Link>
               </div>
