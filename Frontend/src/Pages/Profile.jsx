@@ -3,10 +3,7 @@ import React from 'react'
 export const Profile = () => {
   return (
     <div className=''>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse sint distinctio saepe dicta incidunt. Quo eligendi aut veniam impedit voluptas numquam illum eveniet. Obcaecati laborum voluptatibus ipsum, natus dolorum dolore.
-      Libero ipsa obcaecati assumenda quibusdam inventore, praesentium ullam, unde soluta rem sed nihil, cum minima enim commodi dignissimos repellendus eaque iure porro! Laboriosam vitae totam eaque quibusdam architecto dolore sed.
-      Aspernatur nulla eos minima nesciunt velit officia rerum quae. Aut ipsam, numquam earum officia facilis minima illum ullam cum doloremque explicabo, omnis vitae modi suscipit quam animi perspiciatis quis dicta?
-      Ipsum nulla dicta vitae et! Fugiat odit quaerat omnis. Veniam officiis eaque error sit rem odio eius qui deserunt laudantium, ullam corporis deleniti alias quibusdam quia. Maiores eligendi error cum.</p>
+     
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam ea asperiores ad tempore maiores praesentium dolores a sint, aperiam nemo alias natus laborum excepturi consequuntur quia officiis quod. Obcaecati, corrupti.
     Temporibus consequuntur ut soluta veniam aut reprehenderit corrupti adipisci odit repellat voluptatibus accusantium aliquam praesentium provident sed, expedita odio ratione quo officiis maxime et. Nulla expedita id repellendus atque dignissimos.
     Voluptates ad in aliquam, labore quos, eaque praesentium fugit dolorum odio ut doloribus sequi possimus harum, assumenda iste architecto aut voluptatum quam laboriosam ratione ea voluptas quisquam amet quae? Similique!
