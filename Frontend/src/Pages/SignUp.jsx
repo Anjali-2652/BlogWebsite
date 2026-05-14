@@ -66,7 +66,7 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="flex h-screen md:pt-14 md:h-157.5 ">
+    <div className="flex h-screen md:pt-14 gap-x-10 md:h-157.5 ">
       <div className="hidden md:block">
         <img src={heroImg} alt="" className="h-142.5 w-full object-cover" />
       </div>

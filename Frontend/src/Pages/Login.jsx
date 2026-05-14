@@ -62,7 +62,7 @@ const handleSubmit = async(e)=>{
 
 
   return (
-    <div className="flex h-screen md:pt-14 md:h-157.5  ">
+    <div className="flex h-screen md:pt-14 md:h-157.5 gap-x-10  ">
       <div className="hidden md:block">
         <img src={heroImg} alt="" className="h-142.5 w-full object-cover" />
       </div>
