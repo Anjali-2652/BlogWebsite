@@ -1,18 +1,28 @@
-import React from 'react'
+import { AvatarImage } from "@/Components/ui/avatar";
+import { Card } from "@/Components/ui/card";
+import { Avatar } from "../Components/ui/avatar";
+import React from "react";
+// import userLogo from "../assets/user.jpg";
+import { FaFacebook } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
   return (
-    <div className=''>
-     
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam ea asperiores ad tempore maiores praesentium dolores a sint, aperiam nemo alias natus laborum excepturi consequuntur quia officiis quod. Obcaecati, corrupti.
-    Temporibus consequuntur ut soluta veniam aut reprehenderit corrupti adipisci odit repellat voluptatibus accusantium aliquam praesentium provident sed, expedita odio ratione quo officiis maxime et. Nulla expedita id repellendus atque dignissimos.
-    Voluptates ad in aliquam, labore quos, eaque praesentium fugit dolorum odio ut doloribus sequi possimus harum, assumenda iste architecto aut voluptatum quam laboriosam ratione ea voluptas quisquam amet quae? Similique!
-    Sequi doloribus ut id dolorem, repudiandae velit fuga totam expedita. Enim fuga, aut tempora minus quaerat amet reprehenderit molestiae eveniet consectetur, necessitatibus minima laborum est illum delectus deleniti dolorum! Voluptates.
-    Consequatur obcaecati beatae non tenetur aperiam dolores recusandae quisquam accusantium officiis harum, reiciendis distinctio ea impedit dolore? Sunt, quibusdam, saepe voluptas dolorum voluptates animi ipsum explicabo architecto vero blanditiis a!
-    Sint excepturi delectus perspiciatis molestias, iusto dicta eveniet veritatis corporis sit laboriosam illum rem aperiam ratione sunt, at repellat temporibus atque ullam nobis eos provident ad ipsum? Ex, inventore neque!
-    Aliquid perspiciatis sint ea, magnam, temporibus totam animi id provident reiciendis quibusdam quidem, quae sequi sed dolore eveniet? Molestiae dolores dignissimos nulla repellendus tempora dolorem esse tempore accusamus omnis rem.
-    Dolores saepe perferendis voluptate ullam, similique provident est blanditiis quis cumque omnis modi quos animi ipsa tenetur, molestias optio suscipit totam eos aperiam vero quo vel ipsam? Ex, amet. Laboriosam!</p>
-    
+    <div className=" pt-20 md:ml-80 md:h-screen">
+      <div className="max-w-6xl mx-auto mt-8">
+        <Card className="flex md:flex-row flex-col gap-10 p-6 md:p-10 dark:bg-gray-800 mx-4  md:mx-0">
+          {/* image section......  */}
+          <div className="flex flex-col items-center justify-center md:w-100">
+            {/* <Avatar className="w-40 h-40 border-2">
+              <AvatarImage src={userLogo} />
+            </Avatar> */}
+            <h1 className="text-center font-semibold text-xl text-gray-700 dark:text-gray-300 mt-3">Mern Stack Developer</h1>
+            <div className="flex gap-4 items-center">
+              <Link><FaFacebook className="w-6 h-6 text-gray-800 dark:text-gray-300"/></Link>
+            </div>
+          </div>
+        </Card>
+      </div>
     </div>
-  )
-}
+  );
+};

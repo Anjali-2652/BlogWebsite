@@ -8,6 +8,9 @@ import SignUp from "./Pages/SignUp"
 import Navbar from './Components/Navbar'
 import { Dashboard } from './Pages/Dashboard'
 import { Profile } from './Pages/Profile'
+import { YourBlog } from './Pages/YourBlog'
+import Comments from './Pages/Comments'
+import { CreateBlog } from './Pages/CreateBlog'
 
 
 
@@ -39,7 +42,19 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile/>
-      }
+      },
+      {
+        path: "your-blog",
+        element: <YourBlog/>
+      },
+      {
+        path: "comments",
+        element: <Comments/>
+      },
+      {
+        path: "write-blog",
+        element: <CreateBlog/>
+      },
     ]
   }
 ])
